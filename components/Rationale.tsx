@@ -233,16 +233,7 @@ const Rationale: React.FC<RationaleProps> = ({ lang, setLang }) => {
                 <div className="space-y-8">
                   {selectedNode.videoUrl && (
                     <div className="aspect-video w-full rounded-[2rem] overflow-hidden bg-black shadow-2xl relative">
-                      <iframe 
-                        className="w-full h-full border-0" 
-                        src={`https://www.youtube.com/embed/jX8rBu-4Z2U?si=Yw5S97dash48iztX&rel=0&modestbranding=1&showinfo=0`} 
-                        title="YouTube video player" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerPolicy="strict-origin-when-cross-origin" 
-                        allowFullScreen
-                        loading="lazy"
-                        frameBorder="0"
-                      />
+                   <iframe width="560" height="315" src="https://www.youtube.com/embed/jX8rBu-4Z2U?si=Yw5S97dash48iztX" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
                       <div className="absolute inset-0 flex items-center justify-center bg-gray-900 opacity-0 hover:opacity-70 transition-opacity duration-300">
                         <PlayCircle size={64} className="text-white opacity-80" />
                       </div>
