@@ -38,6 +38,7 @@ const Rationale: React.FC<RationaleProps> = ({ lang, setLang }) => {
   const [score, setScore] = useState(0);
   const [showResult, setShowResult] = useState(false);
   const [progress, setProgress] = useState(0);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   const isAcademicFlow = journey === 'academic' || journey === 'academic-colleges';
 
@@ -47,12 +48,13 @@ const Rationale: React.FC<RationaleProps> = ({ lang, setLang }) => {
       details: 'التفاصيل',
       startQuiz: 'ابدأ الاختبار المعرفي',
       finish: 'إكمال الخطوة',
-      passed: 'رائع! لقد أتممت هذه المرحلة بنجاح.',
+      passed: 'رائع! لقد أتممت هذه المرحلة بنجاع.',
       failed: 'تحتاج للمراجعة مرة أخرى لتجاوز هذه المرحلة.',
       locked: 'هذه الخطوة مغلقة، يجب إكمال ما قبلها أولاً',
       semester: 'الفصل الدراسي',
       timeLocked: 'تفتح هذه الخطوة في',
-      videoIntro: 'شاهد الفيديو التعريفي أولاً'
+      videoIntro: 'شاهد الفيديو التعريفي أولاً',
+      playVideo: 'اضغط لتشغيل الفيديو'
     },
     en: {
       back: 'Back',
@@ -64,7 +66,8 @@ const Rationale: React.FC<RationaleProps> = ({ lang, setLang }) => {
       locked: 'Step locked, complete previous one first',
       semester: 'Semester',
       timeLocked: 'Unlocks on',
-      videoIntro: 'Watch intro video first'
+      videoIntro: 'Watch intro video first',
+      playVideo: 'Click to play video'
     }
   }[lang];
 
@@ -72,6 +75,11 @@ const Rationale: React.FC<RationaleProps> = ({ lang, setLang }) => {
     window.scrollTo(0, 0);
     loadData();
   }, [journey, section, lang]);
+
+  useEffect(() => {
+    // إعادة تعيين حالة التشغيل عند تغيير العقدة المختارة
+    setIsVideoPlaying(false);
+  }, [selectedNode]);
 
   const loadData = () => {
     const rawData = getJourneyDataMap(journey || '', section || '', lang);
@@ -112,6 +120,7 @@ const Rationale: React.FC<RationaleProps> = ({ lang, setLang }) => {
     setQuizStep(0);
     setScore(0);
     setShowResult(false);
+    setIsVideoPlaying(false); // إعادة تعيين حالة الفيديو
   };
 
   const handleQuizAnswer = (index: number) => {
@@ -135,6 +144,10 @@ const Rationale: React.FC<RationaleProps> = ({ lang, setLang }) => {
       loadData();
     }
     setSelectedNode(null);
+  };
+
+  const handlePlayVideo = () => {
+    setIsVideoPlaying(true);
   };
 
   const renderNode = (node: NodeDetail) => (
@@ -233,19 +246,29 @@ const Rationale: React.FC<RationaleProps> = ({ lang, setLang }) => {
                 <div className="space-y-8">
                   {selectedNode.videoUrl && (
                     <div className="aspect-video w-full rounded-[2rem] overflow-hidden bg-black shadow-2xl relative">
-                      <iframe 
-                        className="w-full h-full border-0" 
-                        src={`https://www.youtube.com/embed/jX8rBu-4Z2U?si=Yw5S97dash48iztX&rel=0&modestbranding=1&showinfo=0`} 
-                        title="YouTube video player" 
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
-                        referrerPolicy="strict-origin-when-cross-origin" 
-                        allowFullScreen
-                        loading="lazy"
-                        frameBorder="0"
-                      />
-                      <div className="absolute inset-0 flex items-center justify-center bg-gray-900 opacity-0 hover:opacity-70 transition-opacity duration-300">
-                        <PlayCircle size={64} className="text-white opacity-80" />
-                      </div>
+                      {!isVideoPlaying ? (
+                        <div 
+                          className="absolute inset-0 flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 to-black cursor-pointer"
+                          onClick={handlePlayVideo}
+                        >
+                          <div className="w-24 h-24 bg-white/20 rounded-full flex items-center justify-center mb-6 hover:bg-white/30 transition-all duration-300">
+                            <PlayCircle size={48} className="text-white" />
+                          </div>
+                          <p className="text-white text-xl font-bold">{t.playVideo}</p>
+                          <p className="text-gray-300 mt-2">{selectedNode.title}</p>
+                        </div>
+                      ) : (
+                        <iframe 
+                          className="w-full h-full border-0" 
+                          src={`https://www.youtube.com/embed/jX8rBu-4Z2U?si=Yw5S97dash48iztX&autoplay=1&rel=0&modestbranding=1&showinfo=0`} 
+                          title={`YouTube video - ${selectedNode.title}`}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                          referrerPolicy="strict-origin-when-cross-origin" 
+                          allowFullScreen
+                          loading="lazy"
+                          frameBorder="0"
+                        />
+                      )}
                     </div>
                   )}
                   <div className="prose prose-xl max-w-none text-gray-700 font-bold leading-relaxed whitespace-pre-line bg-gray-50 p-8 rounded-3xl">
