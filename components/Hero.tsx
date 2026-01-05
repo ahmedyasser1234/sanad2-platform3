@@ -55,7 +55,7 @@ const Hero: React.FC<HeroProps> = ({ lang, customTitle, customWelcome }) => {
         <div className="container mx-auto px-4 relative min-h-[500px] lg:min-h-[550px]">
             
             <div className={`absolute top-0 z-20 flex flex-col transition-all duration-500 ${lang === 'ar' ? 'right-0 items-end' : 'left-0 items-start'}`}>
-                <div className={`relative mt-12 md:mt-0 ${lang === 'ar' ? 'mr-12 lg:mr-24 xl:mr-32' : 'ml-12 lg:ml-24 xl:ml-32'}`}>
+                <div className={`relative mt-12 md:mt-0 ${lang === 'ar' ? 'mr-2 md:mr-12 lg:mr-24 xl:mr-32' : 'ml-2 md:ml-12 lg:ml-24 xl:ml-32'}`}>
                     
                     <div className={`absolute z-30 flex items-end min-w-max transition-all duration-500 ${lang === 'ar' ? 'top-[15%] right-[85%]' : 'top-[15%] left-[85%]'}`}>
                          <div className="flex items-end gap-2">
@@ -81,7 +81,7 @@ const Hero: React.FC<HeroProps> = ({ lang, customTitle, customWelcome }) => {
                 </div>
             </div>
 
-            <div className={`w-full flex flex-col items-center justify-center relative z-10 pt-80 md:pt-96 lg:pt-64 ${lang === 'ar' ? 'lg:pr-[35%]' : 'lg:pl-[35%]'}`}>
+            <div className={`w-full flex flex-col items-center justify-center relative z-10 pt-96 md:pt-96 lg:pt-64 ${lang === 'ar' ? 'lg:pr-[35%]' : 'lg:pl-[35%]'}`}>
                 <div className="bg-white/90 backdrop-blur-xl border border-white/50 px-8 py-8 md:px-12 md:py-10 lg:px-16 lg:py-12 rounded-[2.5rem] md:rounded-[3rem] w-full max-w-2xl shadow-[0_15px_40px_rgba(255,200,220,0.1)] text-center transition-all">
                     <h2 className="text-2xl md:text-3xl lg:text-4xl font-black text-gray-700 leading-snug">
                         {t.title}

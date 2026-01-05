@@ -8,8 +8,6 @@ interface HeaderProps {
   setLang: (lang: 'ar' | 'en') => void;
 }
 
-// --- CONFIGURATION ---
-
 const HEADER_LOGO_IMAGE = "/images/Asset 11.png";
 
 const Header: React.FC<HeaderProps> = ({ lang, setLang }) => {
@@ -104,7 +102,7 @@ const Header: React.FC<HeaderProps> = ({ lang, setLang }) => {
           <div className="relative h-12 w-auto">
              <img src={HEADER_LOGO_IMAGE} alt="Sanad Center" className="h-full w-auto object-contain" />
           </div>
-          <div className="flex flex-col items-start">
+          <div className="hidden md:flex flex-col items-start">
             <span className="text-xl font-black text-sanad-primary leading-none">{t.centerName}</span>
             <span className="text-xs text-sanad-primary font-bold mt-1">{t.tagline}</span>
           </div>
