@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import SanadCharacter from './SanadCharacter.tsx';
 import { ArrowRight, X, ChevronRight, ChevronLeft, Lock, CheckCircle2, Clock, PlayCircle } from 'lucide-react';
@@ -233,8 +232,20 @@ const Rationale: React.FC<RationaleProps> = ({ lang, setLang }) => {
               {!isQuizMode ? (
                 <div className="space-y-8">
                   {selectedNode.videoUrl && (
-                    <div className="aspect-video w-full rounded-[2rem] overflow-hidden bg-black shadow-2xl">
-                      <iframe className="w-full h-full border-0" src={selectedNode.videoUrl} title="Introduction" allowFullScreen />
+                    <div className="aspect-video w-full rounded-[2rem] overflow-hidden bg-black shadow-2xl relative">
+                      <iframe 
+                        className="w-full h-full border-0" 
+                        src={`https://www.youtube.com/embed/jX8rBu-4Z2U?si=Yw5S97dash48iztX&rel=0&modestbranding=1&showinfo=0`} 
+                        title="YouTube video player" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                        referrerPolicy="strict-origin-when-cross-origin" 
+                        allowFullScreen
+                        loading="lazy"
+                        frameBorder="0"
+                      />
+                      <div className="absolute inset-0 flex items-center justify-center bg-gray-900 opacity-0 hover:opacity-70 transition-opacity duration-300">
+                        <PlayCircle size={64} className="text-white opacity-80" />
+                      </div>
                     </div>
                   )}
                   <div className="prose prose-xl max-w-none text-gray-700 font-bold leading-relaxed whitespace-pre-line bg-gray-50 p-8 rounded-3xl">
@@ -375,7 +386,7 @@ const getJourneyDataMap = (journey: string, section: string, lang: 'ar' | 'en'):
           fullContent: isAr 
             ? `أهلاً بك في المرحلة ${i} من ${getSectionTitle(journey, section, 'ar')}. نرجو مراجعة المادة التعليمية بتركيز.`
             : `Welcome to Phase ${i} of ${getSectionTitle(journey, section, 'en')}. Please review the materials carefully.`,
-          videoUrl: i <= 2 ? 'https://youtu.be/jX8rBu-4Z2U?si=03H2GbE4aogw0raL' : undefined,
+          videoUrl: i <= 2 ? 'https://www.youtube.com/embed/jX8rBu-4Z2U?si=Yw5S97dash48iztX' : undefined,
           status: i === 1 ? 'unlocked' : 'locked',
           semester: i <= Math.ceil(stepCount / 2) ? 1 : 2,
           quiz: quizSet.map((q: any) => ({
