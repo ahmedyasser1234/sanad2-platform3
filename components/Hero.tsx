@@ -55,7 +55,8 @@ const Hero: React.FC<HeroProps> = ({ lang, customTitle, customWelcome }) => {
         <div className="container mx-auto px-4 relative min-h-[500px] lg:min-h-[550px]">
             
             <div className={`absolute top-0 z-20 flex flex-col transition-all duration-500 ${lang === 'ar' ? 'right-0 items-end' : 'left-0 items-start'}`}>
-                <div className={`relative mt-12 md:mt-0 ${lang === 'ar' ? 'mr-2 md:mr-12 lg:mr-24 xl:mr-32' : 'ml-2 md:ml-12 lg:ml-24 xl:ml-32'}`}>
+                {/* Adjusted mobile margins: -mr-12 for Arabic and ml-16 for English on mobile to move right */}
+                <div className={`relative mt-12 md:mt-0 ${lang === 'ar' ? '-mr-12 md:mr-12 lg:mr-24 xl:mr-32' : 'ml-16 md:ml-12 lg:ml-24 xl:ml-32'}`}>
                     
                     <div className={`absolute z-30 flex items-end min-w-max transition-all duration-500 ${lang === 'ar' ? 'top-[15%] right-[85%]' : 'top-[15%] left-[85%]'}`}>
                          <div className="flex items-end gap-2">
