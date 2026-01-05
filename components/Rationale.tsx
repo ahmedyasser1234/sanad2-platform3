@@ -375,7 +375,7 @@ const getJourneyDataMap = (journey: string, section: string, lang: 'ar' | 'en'):
           fullContent: isAr 
             ? `أهلاً بك في المرحلة ${i} من ${getSectionTitle(journey, section, 'ar')}. نرجو مراجعة المادة التعليمية بتركيز.`
             : `Welcome to Phase ${i} of ${getSectionTitle(journey, section, 'en')}. Please review the materials carefully.`,
-          videoUrl: i <= 2 ? 'https://www.youtube.com/embed/dQw4w9WgXcQ' : undefined,
+          videoUrl: i <= 2 ? 'https://youtu.be/jX8rBu-4Z2U?si=03H2GbE4aogw0raL' : undefined,
           status: i === 1 ? 'unlocked' : 'locked',
           semester: i <= Math.ceil(stepCount / 2) ? 1 : 2,
           quiz: quizSet.map((q: any) => ({
